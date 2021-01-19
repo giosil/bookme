@@ -1,0 +1,7 @@
+<datasource jta="true" jndi-name="java:/jdbc/db_bookme" pool-name="db_bookme" enabled="true" use-ccm="true">
+	<connection-url>jdbc:h2:file:C:/prj/_db/bookme</connection-url>
+	<driver>h2</driver>
+	<security>
+		<user-name>sa</user-name>
+	</security>
+</datasource>
