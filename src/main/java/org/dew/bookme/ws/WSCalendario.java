@@ -114,8 +114,7 @@ class WSCalendario implements ICalendario
     
     WMap wmFilter  = new WMap(mapFilter);
     Calendar cData = wmFilter.getCalendar(sDATA, System.currentTimeMillis());
-    cData = WUtil.setTime(cData, 0);
-    Date dDataCal  = new java.sql.Date(cData.getTimeInMillis());
+    Date dDataCal  = new java.sql.Date(WUtil.setTime(cData, 0).getTimeInMillis());
     int iIdFar     = wmFilter.getInt(sID_FAR);
     int iIdCollab  = wmFilter.getInt(sID_COLLABORATORE);
     boolean boRig  = wmFilter.getBoolean(sRIGENERA, false);
@@ -206,8 +205,7 @@ class WSCalendario implements ICalendario
     WMap wmFilter  = new WMap(mapFilter);
     int iIdFar     = wmFilter.getInt(sID_FAR);
     Calendar cData = wmFilter.getCalendar(sDATA, System.currentTimeMillis());
-    cData = WUtil.setTime(cData, 0);
-    Date dDataCal  = new java.sql.Date(cData.getTimeInMillis());
+    Date dDataCal  = new java.sql.Date(WUtil.setTime(cData, 0).getTimeInMillis());
     int iIdCollab  = wmFilter.getInt(sID_COLLABORATORE);
     
     User user  = WSContext.getUser();
@@ -962,6 +960,8 @@ class WSCalendario implements ICalendario
   {
     if(iIdCollaboratore == 0 || dDataCal == null) return false;
     
+    dDataCal = WUtil.setTime(dDataCal, 0);
+    
     User user  = WSContext.getUser();
     
     Connection conn = null;
@@ -1009,6 +1009,7 @@ class WSCalendario implements ICalendario
     if(dDataCal == null) {
       throw new Exception("Data calendario non specificata.");
     }
+    dDataCal = WUtil.setTime(dDataCal, 0);
     
     User user  = WSContext.getUser();
     int iIdGru = user != null ? user.getGroup() : 0;
@@ -1050,6 +1051,7 @@ class WSCalendario implements ICalendario
     if(dDataCal == null || mapValues == null || mapValues.isEmpty()) {
       return new HashMap<String,Object>();
     }
+    dDataCal = WUtil.setTime(dDataCal, 0);
     
     User user  = WSContext.getUser();
     int iIdUte = user != null ? user.getId()    : 0;
@@ -1294,8 +1296,10 @@ class WSCalendario implements ICalendario
   {
     Map<String,Object> mapResult = new HashMap<String,Object>();
     
-    Date dDate = WUtil.toSQLDate(oDate, null);
-    if(dDate == null) return mapResult;
+    Calendar cDate = WUtil.toCalendar(oDate, null);
+    if(cDate == null) return mapResult;
+    cDate = WUtil.setTime(cDate, 0);
+    Date dDate = new Date(cDate.getTimeInMillis());
     
     String sSQL = "SELECT ID_COLLABORATORE,ORAINIZIO,ORAFINE,MODELLO ";
     sSQL += "FROM PRZ_CALENDARIO ";

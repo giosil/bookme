@@ -193,7 +193,7 @@ class DAOAgende
       pstmA.setString(++p, agenda.getDescrizione());
       pstmA.setString(++p, agenda.getGiorni());
       pstmA.setInt(++p,    boSettimaneAlterne ? 1 : 0);
-      pstmA.setDate(++p,   WUtil.toSQLDate(agenda.getInizioValidita(), new Date()));
+      pstmA.setDate(++p,   WUtil.toSQLDate(agenda.getInizioValidita(), WUtil.getCurrentDate()));
       pstmA.setDate(++p,   WUtil.toSQLDate(agenda.getFineValidita(),   null));
       pstmA.executeUpdate();
       
