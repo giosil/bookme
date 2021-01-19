@@ -1253,8 +1253,8 @@ class WSPrenotazioni
     int iIdUte = user != null ? user.getId()    : 0;
     int iIdGru = user != null ? user.getGroup() : 0;
     
-    String sSQL_Ins = "INSERT INTO PRZ_PRENOTAZIONI(ID,ID_UTE_INSERT,DATA_INSERT,FLAG_ATTIVO,ID_GRU,ID_FAR,CODICE,ID_CLIENTE,ID_PRESTAZIONE,ID_COLLABORATORE,ID_ATTREZZATURA,DATA_APPUNTAMENTO,ORA_APPUNTAMENTO,GIORNO,DURATA,DATAORA_INIZIO,DATAORA_FINE,ID_AGENDA,ID_AGENDA_MODELLO,PROGRESSIVO,STATO,NOTE,PREZZO_FINALE,OVERBOOKING,PREN_ONLINE,UTENTE_DESK,TIPO_APPUNTAMENTO)";
-    sSQL_Ins += "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    String sSQL_Ins = "INSERT INTO PRZ_PRENOTAZIONI(ID,ID_UTE_INSERT,DATA_INSERT,FLAG_ATTIVO,ID_GRU,ID_FAR,CODICE,ID_CLIENTE,ID_PRESTAZIONE,ID_COLLABORATORE,ID_ATTREZZATURA,DATA_APPUNTAMENTO,ORA_APPUNTAMENTO,GIORNO,DURATA,DATAORA_INIZIO,DATAORA_FINE,ID_AGENDA,ID_AGENDA_MODELLO,PROGRESSIVO,STATO,NOTE,PREZZO_FINALE,OVERBOOKING,PREN_ONLINE,FLAG_PAGATO,UTENTE_DESK,TIPO_APPUNTAMENTO)";
+    sSQL_Ins += "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
     int iDataApp   = WUtil.toIntDate(dDataApp, 0);
     int iGiorno    = DateSplitter.getDayOfWeek(iDataApp);
@@ -1473,6 +1473,7 @@ class WSPrenotazioni
           pstmI.setDouble(++p,    dPrezzoFin);
           pstmI.setInt(++p,       overBooking ? 1 : 0);
           pstmI.setInt(++p,       prenOnLine  ? 1 : 0);
+          pstmI.setInt(++p,       0); // FLAG_PAGATO
           pstmI.setString(++p,    prenotazione.getUserDesk());
           pstmI.setString(++p,    prenotazione.getTipo());
           pstmI.executeUpdate();
@@ -1611,6 +1612,7 @@ class WSPrenotazioni
           pstmI.setDouble(++p,    dPrezzoFin);
           pstmI.setInt(++p,       overBooking ? 1 : 0);
           pstmI.setInt(++p,       prenOnLine  ? 1 : 0);
+          pstmI.setInt(++p,       0); // FLAG_PAGATO
           pstmI.setString(++p,    prenotazione.getUserDesk());
           pstmI.setString(++p,    prenotazione.getTipo());
           pstmI.executeUpdate();

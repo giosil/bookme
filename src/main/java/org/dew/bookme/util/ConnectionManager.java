@@ -193,7 +193,7 @@ class ConnectionManager
       }
     }
     else {
-      String sSQL = "UPDATE PROGRESSIVI SET VALORE=VALORE+1 WHERE CODICE = ?";
+      String sSQL = "UPDATE TAB_SEQUENCES SET SEQ_VAL=SEQ_VAL+1 WHERE SEQ_NAME=?";
       PreparedStatement pstm = null;
       ResultSet rs = null;
       try {
@@ -203,7 +203,7 @@ class ConnectionManager
         pstm.close();
         
         if(iRows == 1) {
-          sSQL = "SELECT VALORE FROM PROGRESSIVI WHERE CODICE = ?";
+          sSQL = "SELECT SEQ_VAL FROM TAB_SEQUENCES WHERE SEQ_NAME=?";
           pstm = conn.prepareStatement(sSQL);
           pstm.setString(1, sSequence);
           rs = pstm.executeQuery();
@@ -213,7 +213,7 @@ class ConnectionManager
         }
         else {
           iResult = 1;
-          sSQL = "INSERT INTO PROGRESSIVI(CODICE, VALORE) VALUES(?, ?)";
+          sSQL = "INSERT INTO TAB_SEQUENCES(SEQ_NAME,SEQ_VAL) VALUES(?,?)";
           pstm = conn.prepareStatement(sSQL);
           pstm.setString(1, sSequence);
           pstm.setInt(2, iResult);
