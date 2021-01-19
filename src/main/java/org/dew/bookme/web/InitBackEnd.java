@@ -15,7 +15,7 @@ import org.util.WUtil;
 
 import org.dew.bookme.util.*;
 
-@WebServlet(name = "InitBackEnd", loadOnStartup = 1, urlPatterns = { "/init" })
+@WebServlet(name = "InitBackEnd", loadOnStartup = 0, urlPatterns = { "/init" })
 public
 class InitBackEnd extends HttpServlet
 {
@@ -34,6 +34,8 @@ class InitBackEnd extends HttpServlet
   void init()
       throws ServletException
   {
+    System.out.println("org.dew.bookme.web.InitBackEnd.init()...");
+    
     try {
       InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(sLOGGER_CFG);
       if(is != null) {

@@ -1,0 +1,206 @@
+{
+  "calendario": {
+    "title": "Calendario",
+    "description": "Gestione appuntamenti",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUICalendario(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "prenotazioni": {
+    "title": "Prenotazioni",
+    "description": "Gestione prenotazioni",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUIPrenotazioni(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "trattamenti": {
+    "title": "Trattamenti",
+    "description": "Gestione trattamenti",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUITrattamenti(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "collaboratori": {
+    "title": "Collaboratori",
+    "description": "Gestione collaboratori",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUICollaboratori(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "clienti": {
+    "title": "Clienti",
+    "description": "Gestione clienti",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUIClienti(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "cabine": {
+    "title": "Cabine",
+    "description": "Gestione cabine",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUICabine(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "chiusure": {
+    "title": "Chiusure",
+    "description": "Gestione chiusure",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUIChiusure(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "comunicazioni": {
+    "title": "Comunicazioni",
+    "description": "Gestione comunicazioni",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUIComunicazioni(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "rep_messaggi": {
+    "title": "Report messaggi",
+    "description": "Consultazione ed estrazione messaggi inviati",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUIRepMsg(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "rep_collaboratori": {
+    "title": "Report collaboratori",
+    "description": "Consultazione ed estrazione attivita' collaboratori",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUIRepPro(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "analisi": {
+    "title": "Analisi",
+    "description": "Analisi prenotazioni",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUIChartsPro(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  },
+  "log": {
+    "title": "Log",
+    "description": "Consultazione operazioni",
+    "layout": "default",
+    "modifier": "private",
+    "header": "",
+    "content": "",
+    "footer": "",
+    "script": "WuxDOM.render(new GUI.GUILogOpPren(), 'view-root');",
+    "css": [],
+    "scripts": [
+      "/wrapp/wux/js/wux.min.js",
+      "/bookme/js/res-$language.min.js",
+      "/bookme/js/bookme.min.js"
+    ],
+    "attributes": {}
+  }
+}

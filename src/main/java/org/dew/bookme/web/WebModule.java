@@ -27,7 +27,7 @@ class WebModule extends HttpServlet
   void init()
     throws ServletException
   {
-    System.out.println("WebModule.init()...");
+    System.out.println("org.dew.bookme.web.WebModule.init()...");
     
     try {
       HttpURLConnection connection = (HttpURLConnection) new URL(URL_WRAPP_REFRESH).openConnection();
@@ -40,7 +40,7 @@ class WebModule extends HttpServlet
       refreshResult = ex.toString();
     }
     
-    System.out.println("WebModule.init() " + refreshResult);
+    System.out.println("org.dew.bookme.web.WebModule.init() " + refreshResult);
   }
   
   @Override

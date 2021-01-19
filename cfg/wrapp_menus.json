@@ -1,0 +1,17 @@
+{
+  "main": [
+    { "id": "app",     "text": "Bookme",          "icon": "fa-edit" },
+    { "id": "app.cal", "text": "Calendario",      "icon": null,     "link": "page/calendario"},
+    { "id": "app.prn", "text": "Prenotazioni",    "icon": null,     "link": "page/prenotazioni"},
+    { "id": "app.tra", "text": "Trattamenti",     "icon": null,     "link": "page/trattamenti"},
+    { "id": "app.col", "text": "Collaboratori",   "icon": null,     "link": "page/collaboratori"},
+    { "id": "app.cli", "text": "Clienti",         "icon": null,     "link": "page/clienti"},
+    { "id": "app.cab", "text": "Cabine",          "icon": null,     "link": "page/cabine"},
+    { "id": "app.chi", "text": "Chiusure",        "icon": null,     "link": "page/chiusure"},
+    { "id": "app.com", "text": "Comunicazioni",   "icon": null,     "link": "page/comunicazioni"},
+    { "id": "app.rme", "text": "Report messaggi", "icon": null,     "link": "page/rep_messaggi"},
+    { "id": "app.rco", "text": "Report collab.",  "icon": null,     "link": "page/rep_collaboratori"},
+    { "id": "app.apr", "text": "Analisi pren.",   "icon": null,     "link": "page/analisi"},
+    { "id": "app.log", "text": "Log",             "icon": null,     "link": "page/log"}
+  ]
+}

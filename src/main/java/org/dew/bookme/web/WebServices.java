@@ -12,7 +12,7 @@ import org.dew.bookme.ws.*;
 /**
  * Entry point per il servizio RPC.
  */
-@WebServlet(name = "WebServices", loadOnStartup = 1, urlPatterns = { "/rpc/*" })
+@WebServlet(name = "WebServices", loadOnStartup = 2, urlPatterns = { "/rpc/*" })
 public 
 class WebServices extends org.rpc.server.RpcServlet 
 {
@@ -22,6 +22,8 @@ class WebServices extends org.rpc.server.RpcServlet
   void init() 
       throws ServletException 
   {
+    System.out.println("org.dew.bookme.web.WebServices.init()...");
+    
     rpcExecutor = new org.rpc.server.MultiRpcExecutor();
     
     restAudit  = null;
