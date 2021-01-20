@@ -13,7 +13,7 @@ Web module for booking appointments.
 - Create proper datasources in application server
 - Deploy `bookme.war`
 - Launch `http://localhost:8080/wrapp` 
-- Enter credentials on the login page. The development configuration does not include credential checking.
+- Enter credentials on the login page. In the development configuration the system does not check.
 
 ## Contributors
 
