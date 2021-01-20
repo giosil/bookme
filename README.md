@@ -14,7 +14,7 @@ Web module for booking appointments.
 - Create datasources `jdbc/db_bookme` in your application server
 - Deploy `bookme.war` in your application server
 - Launch `http://localhost:8080/wrapp` 
-- Enter credentials on the login page (no check done in dev configuration)
+- Enter (whatever) credentials on the login page (no check done in dev configuration)
 
 ## Contributors
 
