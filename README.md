@@ -2,18 +2,19 @@
 
 Web module for booking appointments.
 
-## Run 
+## Build and deploy web application 
 
-- Create if not exists `${user.home}/cfg` folder
-- Copy json files from `bookme/cfg` to `${user.home}/cfg`
-- Deploy `wrapp.war` (https://github.com/giosil/wrapp)
+- Create if not exists `${user.home}/cfg` directory
+- Copy json files from `cfg` to `${user.home}/cfg`
+- Build `wrapp.war` from `https://github.com/giosil/wrapp.git`
+- Deploy `wrapp.war` in your application server
 - `git clone https://github.com/giosil/bookme.git` 
 - `mvn clean install` - this will produce `bookme.war` in `target` directory
-- Create database (see `bookme/oracle`, `bookme/mysql`, `bookme/h2`)
-- Create proper datasources in application server
-- Deploy `bookme.war`
+- Create database (see `oracle`, `mysql`, `h2` directories)
+- Create datasources `jdbc/db_bookme` in your application server
+- Deploy `bookme.war` in your application server
 - Launch `http://localhost:8080/wrapp` 
-- Enter credentials on the login page. In the development configuration the system does not check.
+- Enter credentials on the login page (no check done in dev configuration)
 
 ## Contributors
 
