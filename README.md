@@ -4,8 +4,8 @@ Web module for booking appointments.
 
 ## Build and deploy web application 
 
-- Create if not exists `${user.home}/cfg` directory
-- Copy json files from `cfg` to `${user.home}/cfg`
+- Create if not exists `$HOME/cfg` directory
+- Copy json files from `cfg` to `$HOME/cfg`
 - Build `wrapp.war` from `https://github.com/giosil/wrapp.git`
 - Deploy `wrapp.war` in your application server
 - `git clone https://github.com/giosil/bookme.git` 
