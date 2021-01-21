@@ -1,9 +1,9 @@
 /*!
 * DevExtreme (dx.all.d.ts)
-* Version: 20.1.9
-* Build date: Fri Nov 20 2020
+* Version: 20.1.10
+* Build date: Fri Jan 15 2021
 *
-* Copyright (c) 2012 - 2020 Developer Express Inc. ALL RIGHTS RESERVED
+* Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
 * Read about DevExtreme licensing here: https://js.devexpress.com/Licensing/
 */
 /* #StartGlobalDeclaration */
@@ -4970,7 +4970,7 @@ declare module DevExpress.ui {
         /**
          * [descr:dxCheckBox.Options.value]
          */
-        value?: boolean;
+        value?: boolean | undefined;
     }
     /**
      * [descr:dxCheckBox]
