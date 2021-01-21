@@ -23,7 +23,9 @@ import java.util.Set;
 import javax.transaction.UserTransaction;
 
 import org.apache.log4j.Logger;
+
 import org.json.JSON;
+
 import org.util.WList;
 import org.util.WMap;
 import org.util.WUtil;
@@ -1516,8 +1518,9 @@ class WSCalendario implements ICalendario
   {
     Map<String,Object> mapResult = new HashMap<String,Object>();
     
-    Date dDate = WUtil.toSQLDate(oDate, null);
-    if(dDate == null) return mapResult;
+    Calendar cDate = WUtil.toCalendar(oDate, null);
+    if(cDate == null) return mapResult;
+    Date dDate = new Date(WUtil.setTime(cDate, 0).getTimeInMillis());
     
     if(mapSlots == null) mapSlots = new HashMap<String,Object>();
     
