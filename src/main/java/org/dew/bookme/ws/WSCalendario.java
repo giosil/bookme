@@ -55,10 +55,11 @@ class WSCalendario implements ICalendario
   {
     List<Integer> listResult = new ArrayList<Integer>();
     
-    WMap wmFilter = new WMap(mapFilter);
-    Date dDataCal = wmFilter.getSQLDate(sDATA, System.currentTimeMillis());
-    int iIdFar    = wmFilter.getInt(sID_FAR);
-    int iIdCollab = wmFilter.getInt(sID_COLLABORATORE);
+    WMap wmFilter  = new WMap(mapFilter);
+    Calendar cData = wmFilter.getCalendar(sDATA, System.currentTimeMillis());
+    Date dDataCal  = new java.sql.Date(WUtil.setTime(cData, 0).getTimeInMillis());
+    int iIdFar     = wmFilter.getInt(sID_FAR);
+    int iIdCollab  = wmFilter.getInt(sID_COLLABORATORE);
     
     String sSQL = "SELECT ID FROM PRZ_PRENOTAZIONI ";
     //                    1                       2                 3            4                 5
@@ -1298,8 +1299,7 @@ class WSCalendario implements ICalendario
     
     Calendar cDate = WUtil.toCalendar(oDate, null);
     if(cDate == null) return mapResult;
-    cDate = WUtil.setTime(cDate, 0);
-    Date dDate = new Date(cDate.getTimeInMillis());
+    Date dDate = new Date(WUtil.setTime(cDate, 0).getTimeInMillis());
     
     String sSQL = "SELECT ID_COLLABORATORE,ORAINIZIO,ORAFINE,MODELLO ";
     sSQL += "FROM PRZ_CALENDARIO ";
@@ -1394,8 +1394,9 @@ class WSCalendario implements ICalendario
   {
     Map<String,List<Integer>> mapResult = new HashMap<String,List<Integer>>();
     
-    Date dDate = WUtil.toSQLDate(oDate, null);
-    if(dDate == null) return mapResult;
+    Calendar cDate = WUtil.toCalendar(oDate, null);
+    if(cDate == null) return mapResult;
+    Date dDate = new Date(WUtil.setTime(cDate, 0).getTimeInMillis());
     
     String sSQL_V = "SELECT ID_COLLABORATORE,ORAINIZIO,ORAFINE,STATO ";
     sSQL_V += "FROM PRZ_CALENDARIO_VARIAZ ";
