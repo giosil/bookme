@@ -1,5 +1,7 @@
 package org.dew.test;
 
+import org.dew.bookme.util.SMSManager;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -15,6 +17,6 @@ public class TestBookme extends TestCase {
   }
   
   public void testApp() throws Exception {
-    
+    SMSManager.sendSMS("+393498165247", "Messaggio di prova");
   }
 }

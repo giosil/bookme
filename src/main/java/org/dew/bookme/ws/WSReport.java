@@ -96,13 +96,13 @@ class WSReport
     sSQL_N += "GROUP BY ID_COLLABORATORE";
     
     // Query sulle prenotazioni per ottenere le altre misure
-    String sSQL_P = "SELECT C.ID_FAR,C.ID,C.NOME,COUNT(UNIQUE Z.ID_CLIENTE) CLI,COUNT(UNIQUE Z.ID_PRESTAZIONE) PRE,COUNT(*) ESE,SUM(P.DURATA) DUR,SUM(P.PREZZO_FINALE) VAL,SUM(P.PUNTI_COLLAB) PTI,MAX(A.COUNT_A) ANN,MAX(N.COUNT_N) NES ";
-    sSQL_P += "FROM PRZ_PRENOTAZIONI Z,PRZ_PRESTAZIONI P,PRZ_COLLABORATORI C,";
-    sSQL_P += "(" + sSQL_A + ") A,"; // ANNULLATI
-    sSQL_P += "(" + sSQL_N + ") N "; // NON ESEGUITI
-    sSQL_P += "WHERE Z.ID_PRESTAZIONE=P.ID AND Z.ID_COLLABORATORE=C.ID ";
-    sSQL_P += "AND Z.ID_COLLABORATORE=A.ID_COLLABORATORE(+) AND Z.ID_COLLABORATORE=N.ID_COLLABORATORE(+) ";
-    sSQL_P += "AND Z.ID_GRU=? ";
+    String sSQL_P = "SELECT C.ID_FAR,C.ID,C.NOME,COUNT(DISTINCT Z.ID_CLIENTE) CLI,COUNT(DISTINCT Z.ID_PRESTAZIONE) PRE,COUNT(*) ESE,SUM(P.DURATA) DUR,SUM(P.PREZZO_FINALE) VAL,SUM(P.PUNTI_COLLAB) PTI,MAX(A.COUNT_A) ANN,MAX(N.COUNT_N) NES ";
+    sSQL_P += "FROM PRZ_PRENOTAZIONI Z ";
+    sSQL_P += "INNER JOIN PRZ_PRESTAZIONI P ON Z.ID_PRESTAZIONE=P.ID ";
+    sSQL_P += "INNER JOIN PRZ_COLLABORATORI C ON Z.ID_COLLABORATORE=C.ID ";
+    sSQL_P += "LEFT JOIN (" + sSQL_A + ") A ON Z.ID_COLLABORATORE=A.ID_COLLABORATORE "; // ANNULLATI
+    sSQL_P += "LEFT JOIN (" + sSQL_N + ") N ON Z.ID_COLLABORATORE=N.ID_COLLABORATORE "; // NON ESEGUITI
+    sSQL_P += "WHERE Z.ID_GRU=? ";
     if(iIdFar != 0) sSQL_P += "AND Z.ID_FAR=? ";
     sSQL_P += "AND Z.DATA_APPUNTAMENTO>=? AND Z.DATA_APPUNTAMENTO<=? ";
     sSQL_P += "AND Z.STATO NOT IN ('A','N') AND Z.FLAG_ATTIVO=1 ";
@@ -279,9 +279,8 @@ class WSReport
     
     calDal  = WUtil.setTime(calDal,  0);
     java.sql.Date dDal = new java.sql.Date(calDal.getTimeInMillis());
-    calAl  = WUtil.setTime(calAl,  0);
+    calAl  = WUtil.setTime(calAl, 2359);
     java.sql.Date dAl  = new java.sql.Date(calAl.getTimeInMillis());
-    calAl  = WUtil.setTime(calAl,  2359);
     
     String sSQL_CV = "SELECT C.NOME,COUNT(*) ESE,SUM(Z.PREZZO_FINALE) VAL ";
     sSQL_CV += "FROM PRZ_PRENOTAZIONI Z,PRZ_COLLABORATORI C ";
@@ -474,24 +473,11 @@ class WSReport
     calDal = WUtil.setTime(calDal,  0);
     calAl  = WUtil.setTime(calAl,  2359);
     
-    int iYYYYMM = calDal.get(Calendar.YEAR) * 100 + (calDal.get(Calendar.MONTH) + 1);
-    
-    String sSQL = null;
-    if(iYYYYMM >= 201906) {
-      // Passaggio alla gestione centralizzata della messaggistica (App)
-      sSQL = "SELECT TO_CHAR(DATA_INSERT,'YYYYMMDD') DATA,COUNT(UNIQUE ID_CLIENTE) CLI,COUNT(*) MSG,SUM(1-INVIATO) ERR ";
-      sSQL += "FROM LOG_SMS ";
-      sSQL += "WHERE ID_GRU=? AND ID_FAR=? AND DATA_INSERT>=? AND DATA_INSERT<=? ";
-      sSQL += "GROUP BY TO_CHAR(DATA_INSERT,'YYYYMMDD') ";
-      sSQL += "ORDER BY 1";
-    }
-    else {
-      sSQL = "SELECT TO_CHAR(DATA_INSERT,'YYYYMMDD') DATA,COUNT(UNIQUE ID_CLIENTE) CLI,COUNT(*) MSG,SUM(1-INVIATO) ERR ";
-      sSQL += "FROM PRZ_LOG_SMS ";
-      sSQL += "WHERE ID_GRU=? AND ID_FAR=? AND DATA_INSERT>=? AND DATA_INSERT<=? ";
-      sSQL += "GROUP BY TO_CHAR(DATA_INSERT,'YYYYMMDD') ";
-      sSQL += "ORDER BY 1";
-    }
+    String sSQL = "SELECT EXTRACT(DAY FROM DATA_INSERT) DATA,COUNT(DISTINCT ID_CLIENTE) CLI,COUNT(*) MSG,SUM(1-INVIATO) ERR ";
+    sSQL += "FROM PRZ_LOG_SMS ";
+    sSQL += "WHERE ID_GRU=? AND ID_FAR=? AND DATA_INSERT>=? AND DATA_INSERT<=? ";
+    sSQL += "GROUP BY EXTRACT(DAY FROM DATA_INSERT) ";
+    sSQL += "ORDER BY 1";
     
     int iTotMsg = 0;
     int iTotErr = 0;
