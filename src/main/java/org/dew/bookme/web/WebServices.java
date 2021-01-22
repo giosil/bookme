@@ -37,6 +37,7 @@ class WebServices extends org.rpc.server.RpcServlet
     about            = true;
     
     basicAuth        = true;
+    encoding         = "UTF-8";
     
     addWebService(new WSStrutture(),         "STRUTTURE",      "Gestione strutture");
     addWebService(new WSAttrezzature(),      "ATTREZZATURE",   "Gestione attrezzature");
