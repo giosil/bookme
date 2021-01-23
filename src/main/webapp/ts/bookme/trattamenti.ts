@@ -11,7 +11,7 @@
         // Nuovo
         protected btnNew: WUX.WButton;
         // Azioni base
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
@@ -50,7 +50,7 @@
                     this.tagsFilter.setState(this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('GRUPPI_PREST.find', [CFUtil.putUserInfo(this.fpFilter.getState())], (result) => {
+                jrpc.execute('GRUPPI_PREST.find', [AppUtil.putUserInfo(this.fpFilter.getState())], (result) => {
                     this.tabResult.setState(result);
 
                     this.fpDetail.clear();
@@ -235,7 +235,7 @@
             this.fpDetail.addInternalField(IGruppoPrest.sID);
             this.fpDetail.enabled = false;
 
-            this.cntActions = new CFTableActions('ta');
+            this.cntActions = new AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
@@ -287,13 +287,13 @@
         // Nuovo
         protected btnNew: WUX.WButton;
         // Azioni base
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
         protected btnDelete: WUX.WButton;
         // Azioni base 2
-        protected cntActions2: CFTableActions;
+        protected cntActions2: AppTableActions;
         protected btnOpen2: WUX.WButton;
         protected btnSave2: WUX.WButton;
         protected btnCancel2: WUX.WButton;
@@ -349,7 +349,7 @@
                     this.tagsFilter.setState(this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('PRESTAZIONI.find', [CFUtil.putUserInfo(this.fpFilter.getState())], (result) => {
+                jrpc.execute('PRESTAZIONI.find', [AppUtil.putUserInfo(this.fpFilter.getState())], (result) => {
                     this.tabResult.setState(result);
 
                     this.fpDetail.clear();
@@ -1021,14 +1021,14 @@
                 this.tabSelC.setState(cp_collb);
             });
 
-            this.cntActions = new CFTableActions('ta');
+            this.cntActions = new AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
             this.cntActions.left.add(this.btnCancel);
             this.cntActions.right.add(this.btnNew);
 
-            this.cntActions2 = new CFTableActions('ta2');
+            this.cntActions2 = new AppTableActions('ta2');
             this.cntActions2.left.add(this.btnOpen2);
             this.cntActions2.left.add(this.btnDelete2);
             this.cntActions2.left.add(this.btnSave2);
@@ -1164,7 +1164,7 @@
                 pf = pl - sa;
             }
             else {
-                pf = CFUtil.scontato(pl, sp);
+                pf = AppUtil.scontato(pl, sp);
             }
             if (pf < 0) pf = 0;
             let pt = Math.floor(Math.floor(pf / 5) * 2.5);

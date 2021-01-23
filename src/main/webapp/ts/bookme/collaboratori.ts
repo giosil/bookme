@@ -12,14 +12,14 @@
         // Nuovo
         protected btnNew: WUX.WButton;
         // Azioni base
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
         protected btnDelete: WUX.WButton;
         protected btnVisible: WUX.WButton;
         // Azioni base 2
-        protected cntActions2: CFTableActions;
+        protected cntActions2: AppTableActions;
         protected btnOpen2: WUX.WButton;
         protected btnSave2: WUX.WButton;
         protected btnCancel2: WUX.WButton;
@@ -354,7 +354,7 @@
                 values[ICollaboratore.sAGENDA] = this.cmpAgenda.getState();
 
                 if (this.isNew) {
-                    jrpc.execute('COLLABORATORI.insert', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('COLLABORATORI.insert', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
 
                         this.fpDetail.enabled = false;
@@ -370,7 +370,7 @@
                     });
                 }
                 else {
-                    jrpc.execute('COLLABORATORI.update', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('COLLABORATORI.update', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
 
                         this.fpDetail.enabled = false;
@@ -543,7 +543,7 @@
                 values[ICollaboratore.sAGENDA] = this.cmpAgenda.getState();
 
                 if (this.isNew) {
-                    jrpc.execute('COLLABORATORI.insert', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('COLLABORATORI.insert', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
 
                         this.fpDetail.enabled = false;
@@ -559,7 +559,7 @@
                     });
                 }
                 else {
-                    jrpc.execute('COLLABORATORI.update', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('COLLABORATORI.update', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
 
                         this.fpDetail.enabled = false;
@@ -969,7 +969,7 @@
                 .addCol('1', { p: 0 })
                 .addStack(WUX.CSS.STACK_BTNS, this.btnSx, this.btnDx, this.btnCp, this.btnPa);
 
-            this.cntActions = new CFTableActions('ta');
+            this.cntActions = new AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
@@ -977,7 +977,7 @@
             this.cntActions.left.add(this.btnVisible);
             this.cntActions.right.add(this.btnNew);
 
-            this.cntActions2 = new CFTableActions('ta2');
+            this.cntActions2 = new AppTableActions('ta2');
             this.cntActions2.left.add(this.btnOpen2);
             this.cntActions2.left.add(this.btnDelete2);
             this.cntActions2.left.add(this.btnSave2);
@@ -1094,7 +1094,7 @@
                 this.tabSel.setState(WUtil.getArray(result, ICollaboratore.sPRESTAZIONI));
                 this.status = this.iSTATUS_VIEW;
 
-                CFBookCfg.CHECK_USER_DESK = WUtil.getBoolean(result, ICalendario.sCHECK_USER_DESK);
+                BookmeCfg.CHECK_USER_DESK = WUtil.getBoolean(result, ICalendario.sCHECK_USER_DESK);
 
                 let vis = WUtil.getBoolean(result, ICollaboratore.sVISIBILE);
                 if (vis) {

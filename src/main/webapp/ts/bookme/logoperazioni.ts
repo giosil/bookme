@@ -12,7 +12,7 @@
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         // Azioni base
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         // Risultato
         protected tabResult: WUX.WDXTable;
         protected lblResult: WUX.WLabel;
@@ -135,7 +135,7 @@
                 }
             });
 
-            this.cntActions = new CFTableActions('ta');
+            this.cntActions = new AppTableActions('ta');
 
             this.container = new WUX.WContainer();
             this.container.attributes = WUX.ATT.STICKY_CONTAINER;

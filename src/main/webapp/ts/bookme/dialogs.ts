@@ -952,7 +952,7 @@
 
             let ckUsrDesk = WUtil.getBoolean(this.state, IPrenotazione.sCHECK_USER_DESK);
             if (ckUsrDesk) {
-                CFBookCfg.CHECK_USER_DESK = ckUsrDesk;
+                BookmeCfg.CHECK_USER_DESK = ckUsrDesk;
             }
 
             this.idFar = WUtil.getNumber(this.state, IPrenotazione.sID_FAR);

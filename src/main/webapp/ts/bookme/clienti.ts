@@ -11,7 +11,7 @@
         // Nuovo
         protected btnNew: WUX.WButton;
         // Azioni base
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
@@ -332,7 +332,7 @@
                 }
                 let values = this.fpDetail.getState();
                 if (this.isNew) {
-                    jrpc.execute('CLIENTI.insert', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('CLIENTI.insert', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
                         this.fpDetail.enabled = false;
                         this.selId = result[ICliente.sID];
@@ -343,7 +343,7 @@
                     });
                 }
                 else {
-                    jrpc.execute('CLIENTI.update', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('CLIENTI.update', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
                         this.fpDetail.enabled = false;
                         this.selId = result[ICliente.sID];
@@ -488,7 +488,7 @@
                 }
             });
 
-            this.cntActions = new CFTableActions('ta');
+            this.cntActions = new AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);

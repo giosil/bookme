@@ -337,7 +337,7 @@
             super.updateState(nextState);
             this.idFar = WUtil.getNumber(this.state, ICalendario.sID_FAR);
             this.dateCal = WUtil.getDate(this.state, ICalendario.sDATA);
-            CFBookCfg.CHECK_USER_DESK = WUtil.getBoolean(this.state, ICalendario.sCHECK_USER_DESK);
+            BookmeCfg.CHECK_USER_DESK = WUtil.getBoolean(this.state, ICalendario.sCHECK_USER_DESK);
             if (!this.mounted) return;
             if (this.state) {
                 this.resources = WUtil.getArray(this.state, ICalendario.sRISORSE);

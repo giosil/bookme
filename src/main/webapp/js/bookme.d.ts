@@ -20,7 +20,7 @@ declare namespace GUI {
     function getConfig(): any;
     function getLocale(): string;
     function isDevMode(): boolean;
-    class CFUtil {
+    class AppUtil {
         static putUserInfo(params: any): any;
         static addUserInfo(params: any[]): any[];
         static getUserInfo(): {
@@ -29,7 +29,7 @@ declare namespace GUI {
         };
         static scontato(costoBase: number, s1?: number, s2?: number, s3?: number, s4?: number, s5?: number): number;
     }
-    class CFBookCfg {
+    class BookmeCfg {
         static CHECK_USER_DESK: boolean;
     }
     class IAttrezzatura {
@@ -264,12 +264,12 @@ declare namespace GUI {
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         protected btnNew: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
         protected btnDelete: WUX.WButton;
-        protected cntActions2: CFTableActions;
+        protected cntActions2: AppTableActions;
         protected btnOpen2: WUX.WButton;
         protected btnSave2: WUX.WButton;
         protected btnCancel2: WUX.WButton;
@@ -319,12 +319,12 @@ declare namespace GUI {
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         protected btnNew: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
         protected btnDelete: WUX.WButton;
-        protected cntActions2: CFTableActions;
+        protected cntActions2: AppTableActions;
         protected btnOpen2: WUX.WButton;
         protected btnSave2: WUX.WButton;
         protected btnCancel2: WUX.WButton;
@@ -352,7 +352,7 @@ declare namespace GUI {
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         protected btnNew: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
@@ -390,13 +390,13 @@ declare namespace GUI {
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         protected btnNew: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
         protected btnDelete: WUX.WButton;
         protected btnVisible: WUX.WButton;
-        protected cntActions2: CFTableActions;
+        protected cntActions2: AppTableActions;
         protected btnOpen2: WUX.WButton;
         protected btnSave2: WUX.WButton;
         protected btnCancel2: WUX.WButton;
@@ -439,7 +439,7 @@ declare namespace GUI {
     let cp_prest: any[];
     let cp_attrz: any[];
     let cp_collb: any[];
-    class CFTableActions extends WUX.WComponent {
+    class AppTableActions extends WUX.WComponent {
         left: WUX.WContainer;
         right: WUX.WContainer;
         constructor(id: string);
@@ -583,7 +583,7 @@ declare namespace GUI {
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         protected btnNew: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
@@ -846,7 +846,7 @@ declare namespace GUI {
         protected selCab: CFSelectCabine;
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected tabResult: WUX.WDXTable;
         protected lblResult: WUX.WLabel;
         constructor(id?: string);
@@ -942,7 +942,7 @@ declare namespace GUI {
         protected selCab: CFSelectCabine;
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected tabResult: WUX.WDXTable;
         protected lblResult: WUX.WLabel;
         dlgPren: DlgPrenotazione;
@@ -1011,7 +1011,7 @@ declare namespace GUI {
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         protected btnNew: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
@@ -1036,12 +1036,12 @@ declare namespace GUI {
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         protected btnNew: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
         protected btnDelete: WUX.WButton;
-        protected cntActions2: CFTableActions;
+        protected cntActions2: AppTableActions;
         protected btnOpen2: WUX.WButton;
         protected btnSave2: WUX.WButton;
         protected btnCancel2: WUX.WButton;
@@ -1085,12 +1085,12 @@ declare namespace GUI {
         protected btnFind: WUX.WButton;
         protected btnReset: WUX.WButton;
         protected btnNew: WUX.WButton;
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
         protected btnDelete: WUX.WButton;
-        protected cntActions2: CFTableActions;
+        protected cntActions2: AppTableActions;
         protected btnOpen2: WUX.WButton;
         protected btnSave2: WUX.WButton;
         protected btnCancel2: WUX.WButton;

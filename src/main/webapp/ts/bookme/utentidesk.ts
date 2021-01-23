@@ -12,13 +12,13 @@
         // Nuovo
         protected btnNew: WUX.WButton;
         // Azioni base
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
         protected btnDelete: WUX.WButton;
         // Azioni base 2
-        protected cntActions2: CFTableActions;
+        protected cntActions2: AppTableActions;
         protected btnOpen2: WUX.WButton;
         protected btnSave2: WUX.WButton;
         protected btnCancel2: WUX.WButton;
@@ -59,7 +59,7 @@
                     this.tagsFilter.setState(this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('UTENTI_DESK.find', [CFUtil.putUserInfo(this.fpFilter.getState())], (result) => {
+                jrpc.execute('UTENTI_DESK.find', [AppUtil.putUserInfo(this.fpFilter.getState())], (result) => {
                     this.tabResult.setState(result);
 
                     this.fpDetail.clear();
@@ -186,7 +186,7 @@
                 }
 
                 if (this.isNew) {
-                    jrpc.execute('UTENTI_DESK.insert', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('UTENTI_DESK.insert', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
 
                         this.fpDetail.enabled = false;
@@ -196,7 +196,7 @@
                     });
                 }
                 else {
-                    jrpc.execute('UTENTI_DESK.update', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('UTENTI_DESK.update', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
 
                         this.fpDetail.enabled = false;
@@ -307,7 +307,7 @@
                 }
 
                 if (this.isNew) {
-                    jrpc.execute('UTENTI_DESK.insert', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('UTENTI_DESK.insert', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
 
                         this.fpDetail.enabled = false;
@@ -317,7 +317,7 @@
                     });
                 }
                 else {
-                    jrpc.execute('UTENTI_DESK.update', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('UTENTI_DESK.update', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
 
                         this.fpDetail.enabled = false;
@@ -394,14 +394,14 @@
 
             });
 
-            this.cntActions = new CFTableActions('ta');
+            this.cntActions = new AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
             this.cntActions.left.add(this.btnCancel);
             this.cntActions.right.add(this.btnNew);
 
-            this.cntActions2 = new CFTableActions('ta2');
+            this.cntActions2 = new AppTableActions('ta2');
             this.cntActions2.left.add(this.btnOpen2);
             this.cntActions2.left.add(this.btnDelete2);
             this.cntActions2.left.add(this.btnSave2);

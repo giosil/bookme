@@ -12,7 +12,7 @@
         // Nuovo
         protected btnNew: WUX.WButton;
         // Azioni base
-        protected cntActions: CFTableActions;
+        protected cntActions: AppTableActions;
         protected btnOpen: WUX.WButton;
         protected btnSave: WUX.WButton;
         protected btnCancel: WUX.WButton;
@@ -55,7 +55,7 @@
                     this.tagsFilter.setState(this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('COMUNICAZIONI.find', [CFUtil.putUserInfo(this.fpFilter.getState())], (result) => {
+                jrpc.execute('COMUNICAZIONI.find', [AppUtil.putUserInfo(this.fpFilter.getState())], (result) => {
                     this.tabResult.setState(result);
 
                     this.fpDetail.clear();
@@ -184,7 +184,7 @@
                 }
                 values[IComunicazione.sID_FAR] = idf;
                 if (this.isNew) {
-                    jrpc.execute('COMUNICAZIONI.insert', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('COMUNICAZIONI.insert', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
                         this.fpDetail.enabled = false;
                         this.selId = result[IComunicazione.sID];
@@ -192,7 +192,7 @@
                     });
                 }
                 else {
-                    jrpc.execute('COMUNICAZIONI.update', [CFUtil.putUserInfo(values)], (result) => {
+                    jrpc.execute('COMUNICAZIONI.update', [AppUtil.putUserInfo(values)], (result) => {
                         this.status = this.iSTATUS_VIEW;
                         this.fpDetail.enabled = false;
                         this.selId = result[IComunicazione.sID];
@@ -318,7 +318,7 @@
                 });
             });
 
-            this.cntActions = new CFTableActions('ta');
+            this.cntActions = new AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);

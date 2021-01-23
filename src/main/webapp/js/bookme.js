@@ -31,10 +31,10 @@ var GUI;
         return true;
     }
     GUI.isDevMode = isDevMode;
-    var CFUtil = (function () {
-        function CFUtil() {
+    var AppUtil = (function () {
+        function AppUtil() {
         }
-        CFUtil.putUserInfo = function (params) {
+        AppUtil.putUserInfo = function (params) {
             var user = getUserLogged();
             if (!params) {
                 return { '_usr': user.userName, '_grp': WUtil.toNumber(WUtil.getFirst(GUI.getUserLogged().groups, GUI.GRP_DEV)) };
@@ -48,7 +48,7 @@ var GUI;
             params._grp = WUtil.toNumber(WUtil.getFirst(GUI.getUserLogged().groups, GUI.GRP_DEV));
             return params;
         };
-        CFUtil.addUserInfo = function (params) {
+        AppUtil.addUserInfo = function (params) {
             var user = getUserLogged();
             if (!params) {
                 return [user.userName, WUtil.toNumber(WUtil.getFirst(GUI.getUserLogged().groups, GUI.GRP_DEV))];
@@ -57,11 +57,11 @@ var GUI;
             params.push(WUtil.toNumber(WUtil.getFirst(GUI.getUserLogged().groups, GUI.GRP_DEV)));
             return params;
         };
-        CFUtil.getUserInfo = function () {
+        AppUtil.getUserInfo = function () {
             var user = getUserLogged();
             return { '_usr': user.userName, '_grp': WUtil.toNumber(WUtil.getFirst(GUI.getUserLogged().groups, GUI.GRP_DEV)) };
         };
-        CFUtil.scontato = function (costoBase, s1, s2, s3, s4, s5) {
+        AppUtil.scontato = function (costoBase, s1, s2, s3, s4, s5) {
             if (s1 === void 0) { s1 = 0; }
             if (s2 === void 0) { s2 = 0; }
             if (s3 === void 0) { s3 = 0; }
@@ -84,16 +84,16 @@ var GUI;
                 return 0;
             return r;
         };
-        return CFUtil;
+        return AppUtil;
     }());
-    GUI.CFUtil = CFUtil;
-    var CFBookCfg = (function () {
-        function CFBookCfg() {
+    GUI.AppUtil = AppUtil;
+    var BookmeCfg = (function () {
+        function BookmeCfg() {
         }
-        CFBookCfg.CHECK_USER_DESK = false;
-        return CFBookCfg;
+        BookmeCfg.CHECK_USER_DESK = false;
+        return BookmeCfg;
     }());
-    GUI.CFBookCfg = CFBookCfg;
+    GUI.BookmeCfg = BookmeCfg;
     var IAttrezzatura = (function () {
         function IAttrezzatura() {
         }
@@ -319,7 +319,7 @@ var GUI;
     }
     GUI.getWeek2020 = getWeek2020;
     function chkExecute(methodName, params, successHandler) {
-        if (!CFBookCfg.CHECK_USER_DESK) {
+        if (!BookmeCfg.CHECK_USER_DESK) {
             jrpc.execute(methodName, params, successHandler);
             return;
         }
@@ -401,7 +401,7 @@ var GUI;
                     _this.tagsFilter.setState(_this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('ATTREZZATURE.find', [GUI.CFUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
+                jrpc.execute('ATTREZZATURE.find', [GUI.AppUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
                     _this.tabResult.setState(result);
                     _this.fpDetail.clear();
                     _this.tabSel.setState([]);
@@ -525,7 +525,7 @@ var GUI;
                 values[GUI.IAttrezzatura.sID_FAR] = idf;
                 values[GUI.IAttrezzatura.sPRESTAZIONI] = _this.tabSel.getState();
                 if (_this.isNew) {
-                    jrpc.execute('ATTREZZATURE.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('ATTREZZATURE.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.btnDx.enabled = false;
@@ -536,7 +536,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('ATTREZZATURE.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('ATTREZZATURE.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.btnDx.enabled = false;
@@ -648,7 +648,7 @@ var GUI;
                 values[GUI.IAttrezzatura.sID_FAR] = idf;
                 values[GUI.IAttrezzatura.sPRESTAZIONI] = _this.tabSel.getState();
                 if (_this.isNew) {
-                    jrpc.execute('ATTREZZATURE.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('ATTREZZATURE.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.btnDx.enabled = false;
@@ -659,7 +659,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('ATTREZZATURE.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('ATTREZZATURE.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.btnDx.enabled = false;
@@ -897,13 +897,13 @@ var GUI;
                 .add(this.tabSel)
                 .addCol('1', { p: 0 })
                 .addStack(WUX.CSS.STACK_BTNS, this.btnSx, this.btnDx, this.btnCp, this.btnPa);
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
             this.cntActions.left.add(this.btnCancel);
             this.cntActions.right.add(this.btnNew);
-            this.cntActions2 = new GUI.CFTableActions('ta2');
+            this.cntActions2 = new GUI.AppTableActions('ta2');
             this.cntActions2.left.add(this.btnOpen2);
             this.cntActions2.left.add(this.btnDelete2);
             this.cntActions2.left.add(this.btnSave2);
@@ -1260,7 +1260,7 @@ var GUI;
                     _this.tagsFilter.setState(_this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('CHIUSURE.find', [GUI.CFUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
+                jrpc.execute('CHIUSURE.find', [GUI.AppUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
                     _this.tabResult.setState(result);
                     _this.fpDetail.clear();
                     _this.status = _this.iSTATUS_STARTUP;
@@ -1361,7 +1361,7 @@ var GUI;
                 var values = _this.fpDetail.getState();
                 values[GUI.IChiusura.sID_FAR] = idf;
                 if (_this.isNew) {
-                    jrpc.execute('CHIUSURE.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('CHIUSURE.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IChiusura.sID];
@@ -1369,7 +1369,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('CHIUSURE.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('CHIUSURE.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IChiusura.sID];
@@ -1468,7 +1468,7 @@ var GUI;
                 var values = _this.fpDetail.getState();
                 values[GUI.IChiusura.sID_FAR] = idf;
                 if (_this.isNew) {
-                    jrpc.execute('CHIUSURE.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('CHIUSURE.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IChiusura.sID];
@@ -1476,7 +1476,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('CHIUSURE.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('CHIUSURE.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IChiusura.sID];
@@ -1548,13 +1548,13 @@ var GUI;
             this.tabResult.onSelectionChanged(function (e) {
                 _this.onSelect();
             });
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
             this.cntActions.left.add(this.btnCancel);
             this.cntActions.right.add(this.btnNew);
-            this.cntActions2 = new GUI.CFTableActions('ta2');
+            this.cntActions2 = new GUI.AppTableActions('ta2');
             this.cntActions2.left.add(this.btnOpen2);
             this.cntActions2.left.add(this.btnDelete2);
             this.cntActions2.left.add(this.btnSave2);
@@ -1909,7 +1909,7 @@ var GUI;
                 }
                 var values = _this.fpDetail.getState();
                 if (_this.isNew) {
-                    jrpc.execute('CLIENTI.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('CLIENTI.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.ICliente.sID];
@@ -1920,7 +1920,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('CLIENTI.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('CLIENTI.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.ICliente.sID];
@@ -2065,7 +2065,7 @@ var GUI;
                     WUX.setCss(e.rowElement, WUX.CSS.ERROR);
                 }
             });
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
@@ -2399,7 +2399,7 @@ var GUI;
                 values[GUI.ICollaboratore.sPRESTAZIONI] = _this.tabSel.getState();
                 values[GUI.ICollaboratore.sAGENDA] = _this.cmpAgenda.getState();
                 if (_this.isNew) {
-                    jrpc.execute('COLLABORATORI.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('COLLABORATORI.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.cmpAgenda.enabled = false;
@@ -2412,7 +2412,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('COLLABORATORI.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('COLLABORATORI.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.cmpAgenda.enabled = false;
@@ -2574,7 +2574,7 @@ var GUI;
                 values[GUI.ICollaboratore.sPRESTAZIONI] = _this.tabSel.getState();
                 values[GUI.ICollaboratore.sAGENDA] = _this.cmpAgenda.getState();
                 if (_this.isNew) {
-                    jrpc.execute('COLLABORATORI.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('COLLABORATORI.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.cmpAgenda.enabled = false;
@@ -2587,7 +2587,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('COLLABORATORI.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('COLLABORATORI.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.cmpAgenda.enabled = false;
@@ -2980,14 +2980,14 @@ var GUI;
                 .add(this.tabSel)
                 .addCol('1', { p: 0 })
                 .addStack(WUX.CSS.STACK_BTNS, this.btnSx, this.btnDx, this.btnCp, this.btnPa);
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
             this.cntActions.left.add(this.btnCancel);
             this.cntActions.left.add(this.btnVisible);
             this.cntActions.right.add(this.btnNew);
-            this.cntActions2 = new GUI.CFTableActions('ta2');
+            this.cntActions2 = new GUI.AppTableActions('ta2');
             this.cntActions2.left.add(this.btnOpen2);
             this.cntActions2.left.add(this.btnDelete2);
             this.cntActions2.left.add(this.btnSave2);
@@ -3091,7 +3091,7 @@ var GUI;
                 _this.tabVar.setState(WUtil.getArray(result, GUI.ICollaboratore.sVARIAZIONI));
                 _this.tabSel.setState(WUtil.getArray(result, GUI.ICollaboratore.sPRESTAZIONI));
                 _this.status = _this.iSTATUS_VIEW;
-                GUI.CFBookCfg.CHECK_USER_DESK = WUtil.getBoolean(result, GUI.ICalendario.sCHECK_USER_DESK);
+                GUI.BookmeCfg.CHECK_USER_DESK = WUtil.getBoolean(result, GUI.ICalendario.sCHECK_USER_DESK);
                 var vis = WUtil.getBoolean(result, GUI.ICollaboratore.sVISIBILE);
                 if (vis) {
                     _this.btnVisible.setText('Non visibile', WUX.WIcon.THUMBS_O_DOWN);
@@ -3142,29 +3142,29 @@ var GUI;
 var GUI;
 (function (GUI) {
     var WUtil = WUX.WUtil;
-    var CFTableActions = (function (_super) {
-        __extends(CFTableActions, _super);
-        function CFTableActions(id) {
-            var _this = _super.call(this, id, 'CFTableActions', null, 'table-actions-wrapper') || this;
+    var AppTableActions = (function (_super) {
+        __extends(AppTableActions, _super);
+        function AppTableActions(id) {
+            var _this = _super.call(this, id, 'AppTableActions', null, 'table-actions-wrapper') || this;
             _this.left = new WUX.WContainer(_this.subId('l'), 'left-actions');
             _this.right = new WUX.WContainer(_this.subId('r'), 'right-actions');
             return _this;
         }
-        CFTableActions.prototype.componentDidMount = function () {
+        AppTableActions.prototype.componentDidMount = function () {
             var $i = $('<div class="table-actions clearfix" data-b2x-sticky-element="1" data-b2x-sticky-element-z-index="3"></div>');
             this.root.append($i);
             this.left.mount($i);
             this.right.mount($i);
         };
-        CFTableActions.prototype.setLeftVisible = function (v) {
+        AppTableActions.prototype.setLeftVisible = function (v) {
             this.left.visible = v;
         };
-        CFTableActions.prototype.setRightVisible = function (v) {
+        AppTableActions.prototype.setRightVisible = function (v) {
             this.right.visible = v;
         };
-        return CFTableActions;
+        return AppTableActions;
     }(WUX.WComponent));
-    GUI.CFTableActions = CFTableActions;
+    GUI.AppTableActions = AppTableActions;
     var CFSelectMesi = (function (_super) {
         __extends(CFSelectMesi, _super);
         function CFSelectMesi(id, mesi, pros) {
@@ -4323,7 +4323,7 @@ var GUI;
                     _this.tagsFilter.setState(_this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('COMUNICAZIONI.find', [GUI.CFUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
+                jrpc.execute('COMUNICAZIONI.find', [GUI.AppUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
                     _this.tabResult.setState(result);
                     _this.fpDetail.clear();
                     _this.tabList.setState([]);
@@ -4437,7 +4437,7 @@ var GUI;
                 }
                 values[GUI.IComunicazione.sID_FAR] = idf;
                 if (_this.isNew) {
-                    jrpc.execute('COMUNICAZIONI.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('COMUNICAZIONI.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IComunicazione.sID];
@@ -4445,7 +4445,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('COMUNICAZIONI.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('COMUNICAZIONI.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IComunicazione.sID];
@@ -4571,7 +4571,7 @@ var GUI;
                     });
                 });
             });
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
@@ -5533,7 +5533,7 @@ var GUI;
             _super.prototype.updateState.call(this, nextState);
             var ckUsrDesk = WUtil.getBoolean(this.state, GUI.IPrenotazione.sCHECK_USER_DESK);
             if (ckUsrDesk) {
-                GUI.CFBookCfg.CHECK_USER_DESK = ckUsrDesk;
+                GUI.BookmeCfg.CHECK_USER_DESK = ckUsrDesk;
             }
             this.idFar = WUtil.getNumber(this.state, GUI.IPrenotazione.sID_FAR);
             this.idPren = WUtil.getNumber(this.state, GUI.IPrenotazione.sID);
@@ -7317,7 +7317,7 @@ var GUI;
                         break;
                 }
             });
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.container = new WUX.WContainer();
             this.container.attributes = WUX.ATT.STICKY_CONTAINER;
             this.container
@@ -7671,7 +7671,7 @@ var GUI;
             _super.prototype.updateState.call(this, nextState);
             this.idFar = WUtil.getNumber(this.state, GUI.ICalendario.sID_FAR);
             this.dateCal = WUtil.getDate(this.state, GUI.ICalendario.sDATA);
-            GUI.CFBookCfg.CHECK_USER_DESK = WUtil.getBoolean(this.state, GUI.ICalendario.sCHECK_USER_DESK);
+            GUI.BookmeCfg.CHECK_USER_DESK = WUtil.getBoolean(this.state, GUI.ICalendario.sCHECK_USER_DESK);
             if (!this.mounted)
                 return;
             if (this.state) {
@@ -8345,7 +8345,7 @@ var GUI;
                     _this.dlgPren.show();
                 });
             });
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.container = new WUX.WContainer();
             this.container.attributes = WUX.ATT.STICKY_CONTAINER;
             this.container
@@ -8796,7 +8796,7 @@ var GUI;
                     _this.tagsFilter.setState(_this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('GRUPPI_PREST.find', [GUI.CFUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
+                jrpc.execute('GRUPPI_PREST.find', [GUI.AppUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
                     _this.tabResult.setState(result);
                     _this.fpDetail.clear();
                     _this.status = _this.iSTATUS_STARTUP;
@@ -8957,7 +8957,7 @@ var GUI;
             this.fpDetail.addTextField(GUI.IGruppoPrest.sDESCRIZIONE, 'Descrizione');
             this.fpDetail.addInternalField(GUI.IGruppoPrest.sID);
             this.fpDetail.enabled = false;
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
@@ -9024,7 +9024,7 @@ var GUI;
                     _this.tagsFilter.setState(_this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('PRESTAZIONI.find', [GUI.CFUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
+                jrpc.execute('PRESTAZIONI.find', [GUI.AppUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
                     _this.tabResult.setState(result);
                     _this.fpDetail.clear();
                     _this.status = _this.iSTATUS_STARTUP;
@@ -9654,13 +9654,13 @@ var GUI;
                 }
                 _this.tabSelC.setState(GUI.cp_collb);
             });
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
             this.cntActions.left.add(this.btnCancel);
             this.cntActions.right.add(this.btnNew);
-            this.cntActions2 = new GUI.CFTableActions('ta2');
+            this.cntActions2 = new GUI.AppTableActions('ta2');
             this.cntActions2.left.add(this.btnOpen2);
             this.cntActions2.left.add(this.btnDelete2);
             this.cntActions2.left.add(this.btnSave2);
@@ -9783,7 +9783,7 @@ var GUI;
                 pf = pl - sa;
             }
             else {
-                pf = GUI.CFUtil.scontato(pl, sp);
+                pf = GUI.AppUtil.scontato(pl, sp);
             }
             if (pf < 0)
                 pf = 0;
@@ -9834,7 +9834,7 @@ var GUI;
                     _this.tagsFilter.setState(_this.fpFilter.getValues(true));
                     box.collapse();
                 }
-                jrpc.execute('UTENTI_DESK.find', [GUI.CFUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
+                jrpc.execute('UTENTI_DESK.find', [GUI.AppUtil.putUserInfo(_this.fpFilter.getState())], function (result) {
                     _this.tabResult.setState(result);
                     _this.fpDetail.clear();
                     _this.status = _this.iSTATUS_STARTUP;
@@ -9941,7 +9941,7 @@ var GUI;
                     return;
                 }
                 if (_this.isNew) {
-                    jrpc.execute('UTENTI_DESK.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('UTENTI_DESK.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IUtenteDesk.sID];
@@ -9949,7 +9949,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('UTENTI_DESK.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('UTENTI_DESK.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IUtenteDesk.sID];
@@ -10053,7 +10053,7 @@ var GUI;
                     return;
                 }
                 if (_this.isNew) {
-                    jrpc.execute('UTENTI_DESK.insert', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('UTENTI_DESK.insert', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IUtenteDesk.sID];
@@ -10061,7 +10061,7 @@ var GUI;
                     });
                 }
                 else {
-                    jrpc.execute('UTENTI_DESK.update', [GUI.CFUtil.putUserInfo(values)], function (result) {
+                    jrpc.execute('UTENTI_DESK.update', [GUI.AppUtil.putUserInfo(values)], function (result) {
                         _this.status = _this.iSTATUS_VIEW;
                         _this.fpDetail.enabled = false;
                         _this.selId = result[GUI.IUtenteDesk.sID];
@@ -10133,13 +10133,13 @@ var GUI;
             this.tabResult.onSelectionChanged(function (e) {
                 _this.onSelect();
             });
-            this.cntActions = new GUI.CFTableActions('ta');
+            this.cntActions = new GUI.AppTableActions('ta');
             this.cntActions.left.add(this.btnOpen);
             this.cntActions.left.add(this.btnDelete);
             this.cntActions.left.add(this.btnSave);
             this.cntActions.left.add(this.btnCancel);
             this.cntActions.right.add(this.btnNew);
-            this.cntActions2 = new GUI.CFTableActions('ta2');
+            this.cntActions2 = new GUI.AppTableActions('ta2');
             this.cntActions2.left.add(this.btnOpen2);
             this.cntActions2.left.add(this.btnDelete2);
             this.cntActions2.left.add(this.btnSave2);

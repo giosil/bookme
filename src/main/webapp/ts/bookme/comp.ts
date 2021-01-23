@@ -9,14 +9,14 @@
     export let cp_attrz: any[];
     export let cp_collb: any[];
 
-    export class CFTableActions extends WUX.WComponent {
+    export class AppTableActions extends WUX.WComponent {
         left: WUX.WContainer;
         right: WUX.WContainer;
 
         constructor(id: string) {
             // WComponent init
-            super(id, 'CFTableActions', null, 'table-actions-wrapper');
-            // CFTableActions init
+            super(id, 'AppTableActions', null, 'table-actions-wrapper');
+            // AppTableActions init
             this.left = new WUX.WContainer(this.subId('l'), 'left-actions');
             this.right = new WUX.WContainer(this.subId('r'), 'right-actions');
         }

@@ -51,7 +51,7 @@
         return true;
     }
 
-    export class CFUtil {
+    export class AppUtil {
         static putUserInfo(params: any): any {
             let user = getUserLogged();
             if (!params) {
@@ -95,7 +95,7 @@
         }
     }
 
-    export class CFBookCfg {
+    export class BookmeCfg {
 
         /** Se abilitato viene richiesta la password ad ogni operazione di prenotazione / aggiornamento */
         static CHECK_USER_DESK = false;
@@ -366,7 +366,7 @@
     export let __s: (result: any) => void;
 
     export function chkExecute(methodName: string, params: any[], successHandler?: (result: any) => void): void {
-        if (!CFBookCfg.CHECK_USER_DESK) {
+        if (!BookmeCfg.CHECK_USER_DESK) {
             jrpc.execute(methodName, params, successHandler);
             return;
         }
