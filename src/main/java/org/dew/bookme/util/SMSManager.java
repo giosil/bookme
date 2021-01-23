@@ -13,10 +13,17 @@ import org.dew.bookme.dao.DAOLog;
 public 
 class SMSManager 
 {
-  private static final String SMS_SERVICE_URL = "";
-  private static final String SMS_SERVICE_USR = "XXXXXXXX";
-  private static final String SMS_SERVICE_PWD = "********";
-  private static final String SMS_SERVICE_SND = "bookme";
+  private static String SMS_SERVICE_URL;
+  private static String SMS_SERVICE_USR;
+  private static String SMS_SERVICE_PWD;
+  private static String SMS_SERVICE_SND;
+  
+  static {
+    SMS_SERVICE_URL = BEConfig.getProperty("smsmgr.url");
+    SMS_SERVICE_USR = BEConfig.getProperty("smsmgr.user");
+    SMS_SERVICE_PWD = BEConfig.getProperty("smsmgr.password");
+    SMS_SERVICE_SND = BEConfig.getProperty("smsmgr.sender", "bookme");
+  }
   
   public static
   int sendSMS(String number, String message)
@@ -42,11 +49,10 @@ class SMSManager
       URL url = new URL(SMS_SERVICE_URL);
       
       urlConnection = url.openConnection();
-      urlConnection.setConnectTimeout(5000);
+      urlConnection.setConnectTimeout(10000);
       urlConnection.setDoInput(true);
       urlConnection.setDoOutput(true);
       
-      dataOutputStream = new DataOutputStream(urlConnection.getOutputStream());
       String content = "user=" + URLEncoder.encode(SMS_SERVICE_USR, "UTF-8") + 
           "&pass="   + URLEncoder.encode(SMS_SERVICE_PWD, "UTF-8") + 
           "&rcpt="   + URLEncoder.encode(number, "UTF-8") + 
@@ -54,6 +60,7 @@ class SMSManager
           "&sender=" + URLEncoder.encode(SMS_SERVICE_SND, "UTF-8") + 
           "&qty="    + URLEncoder.encode("h", "UTF-8");
       
+      dataOutputStream = new DataOutputStream(urlConnection.getOutputStream());
       dataOutputStream.writeBytes(content);
       dataOutputStream.flush();
       dataOutputStream.close();
@@ -104,11 +111,10 @@ class SMSManager
       URL url = new URL(SMS_SERVICE_URL);
       
       urlConnection = url.openConnection();
-      urlConnection.setConnectTimeout(5000);
+      urlConnection.setConnectTimeout(10000);
       urlConnection.setDoInput(true);
       urlConnection.setDoOutput(true);
       
-      dataOutputStream = new DataOutputStream(urlConnection.getOutputStream());
       String content = "user=" + URLEncoder.encode(SMS_SERVICE_USR, "UTF-8") + 
           "&pass="   + URLEncoder.encode(SMS_SERVICE_PWD, "UTF-8") + 
           "&rcpt="   + URLEncoder.encode(number, "UTF-8") + 
@@ -116,6 +122,7 @@ class SMSManager
           "&sender=" + URLEncoder.encode(SMS_SERVICE_SND, "UTF-8") + 
           "&qty="    + URLEncoder.encode("h", "UTF-8");
       
+      dataOutputStream = new DataOutputStream(urlConnection.getOutputStream());
       dataOutputStream.writeBytes(content);
       dataOutputStream.flush();
       dataOutputStream.close();
