@@ -37,9 +37,7 @@
     <dependency>
       <groupId>org.dew</groupId>
       <artifactId>multi-rpc</artifactId>
-      <version>1.0.0</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/multi-rpc-2.0.0.jar</systemPath>
+      <version>2.0.0</version>
     </dependency>
   </dependencies>
   
