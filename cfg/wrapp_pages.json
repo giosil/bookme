@@ -180,6 +180,7 @@
     "script": "WuxDOM.render(new GUI.GUIChartsPro(), 'view-root');",
     "css": [],
     "scripts": [
+      "/wrapp/inspinia/js/plugins/chartJs/Chart.min.js",
       "/wrapp/wux/js/wux.min.js",
       "/bookme/js/res-$language.min.js",
       "/bookme/js/bookme.min.js"
