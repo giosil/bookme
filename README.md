@@ -1,6 +1,6 @@
 # Bookme module
 
-Web module for booking appointments.
+Web module to manage appointments.
 
 ## Build and deploy web application 
 
