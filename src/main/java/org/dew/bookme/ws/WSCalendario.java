@@ -1294,14 +1294,12 @@ class WSCalendario implements ICalendario
   }
   
   public static
-  Map<String,Object> getSlots(Connection conn, int iIdGru, int iIdFar, int iIdCollab, Object oDate, boolean markAppointment)
+  Map<String,Object> getSlots(Connection conn, int iIdGru, int iIdFar, int iIdCollab, java.util.Date dDate, boolean markAppointment)
       throws Exception
   {
     Map<String,Object> mapResult = new HashMap<String,Object>();
     
-    Calendar cDate = WUtil.toCalendar(oDate, null);
-    if(cDate == null) return mapResult;
-    Date dDate = new Date(WUtil.setTime(cDate, 0).getTimeInMillis());
+    if(dDate == null) return mapResult;
     
     String sSQL = "SELECT ID_COLLABORATORE,ORAINIZIO,ORAFINE,MODELLO ";
     sSQL += "FROM PRZ_CALENDARIO ";
@@ -1320,7 +1318,7 @@ class WSCalendario implements ICalendario
       pstmC.setInt(++p,    iIdGru);
       pstmC.setInt(++p,    iIdFar);
       pstmC.setInt(++p,    1); // FLAG_ATTIVO
-      pstmC.setDate(++p,   dDate);
+      pstmC.setDate(++p,   new java.sql.Date(dDate.getTime()));
       pstmC.setString(++p, "S"); // STATO
       if(iIdCollab != 0) {
         pstmC.setInt(++p, iIdCollab);
@@ -1381,7 +1379,7 @@ class WSCalendario implements ICalendario
       }
     }
     catch(Exception ex) {
-      logger.error("Eccezione in WSCalendario.getSlots(conn," + iIdGru + "," + iIdFar + "," + iIdCollab + "," + oDate + "," + markAppointment + ")", ex);
+      logger.error("Eccezione in WSCalendario.getSlots(conn," + iIdGru + "," + iIdFar + "," + iIdCollab + "," + dDate + "," + markAppointment + ")", ex);
       throw ex;
     }
     finally {
@@ -1391,14 +1389,12 @@ class WSCalendario implements ICalendario
   }
   
   public static
-  Map<String,List<Integer>> getTimeTable(Connection conn, int iIdGru, int iIdFar, int iIdCollab, Object oDate)
+  Map<String,List<Integer>> getTimeTable(Connection conn, int iIdGru, int iIdFar, int iIdCollab, Date dDate)
       throws Exception
   {
     Map<String,List<Integer>> mapResult = new HashMap<String,List<Integer>>();
     
-    Calendar cDate = WUtil.toCalendar(oDate, null);
-    if(cDate == null) return mapResult;
-    Date dDate = new Date(WUtil.setTime(cDate, 0).getTimeInMillis());
+    if(dDate == null) return mapResult;
     
     String sSQL_V = "SELECT ID_COLLABORATORE,ORAINIZIO,ORAFINE,STATO ";
     sSQL_V += "FROM PRZ_CALENDARIO_VARIAZ ";
@@ -1503,7 +1499,7 @@ class WSCalendario implements ICalendario
       
     }
     catch(Exception ex) {
-      logger.error("Eccezione in WSCalendario.getTimeTable(conn," + iIdGru + "," + iIdFar + "," + iIdCollab + "," + oDate + ")", ex);
+      logger.error("Eccezione in WSCalendario.getTimeTable(conn," + iIdGru + "," + iIdFar + "," + iIdCollab + "," + dDate + ")", ex);
       throw ex;
     }
     finally {
@@ -1513,14 +1509,12 @@ class WSCalendario implements ICalendario
   }
   
   public static
-  Map<String,Object> getAppointments(Connection conn, int iIdGru, int iIdFar, int iIdCollab, Object oDate, Map<String,Object> mapSlots)
+  Map<String,Object> getAppointments(Connection conn, int iIdGru, int iIdFar, int iIdCollab, java.util.Date dDate, Map<String,Object> mapSlots)
       throws Exception
   {
     Map<String,Object> mapResult = new HashMap<String,Object>();
     
-    Calendar cDate = WUtil.toCalendar(oDate, null);
-    if(cDate == null) return mapResult;
-    Date dDate = new Date(WUtil.setTime(cDate, 0).getTimeInMillis());
+    if(dDate == null) return mapResult;
     
     if(mapSlots == null) mapSlots = new HashMap<String,Object>();
     
@@ -1540,7 +1534,7 @@ class WSCalendario implements ICalendario
       pstm.setInt(++p,  iIdGru);
       pstm.setInt(++p,  iIdFar);
       pstm.setInt(++p,  1);
-      pstm.setDate(++p, dDate);
+      pstm.setDate(++p, new java.sql.Date(dDate.getTime()));
       if(iIdCollab != 0) {
         pstm.setInt(++p, iIdCollab);
       }
@@ -1626,7 +1620,7 @@ class WSCalendario implements ICalendario
       }
     }
     catch(Exception ex) {
-      logger.error("Eccezione in WSCalendario.getAppointments(conn," + iIdGru + "," + iIdFar + "," + iIdCollab + "," + oDate + "," + mapSlots + ")", ex);
+      logger.error("Eccezione in WSCalendario.getAppointments(conn," + iIdGru + "," + iIdFar + "," + iIdCollab + "," + dDate + "," + mapSlots + ")", ex);
       throw ex;
     }
     finally {
