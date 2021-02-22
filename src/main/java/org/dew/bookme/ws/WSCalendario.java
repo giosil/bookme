@@ -58,8 +58,7 @@ class WSCalendario implements ICalendario
     List<Integer> listResult = new ArrayList<Integer>();
     
     WMap wmFilter  = new WMap(mapFilter);
-    Calendar cData = wmFilter.getCalendar(sDATA, System.currentTimeMillis());
-    Date dDataCal  = new java.sql.Date(WUtil.setTime(cData, 0).getTimeInMillis());
+    Date dDataCal  = wmFilter.getSQLDate(sDATA, System.currentTimeMillis(), 0);
     int iIdFar     = wmFilter.getInt(sID_FAR);
     int iIdCollab  = wmFilter.getInt(sID_COLLABORATORE);
     
@@ -116,8 +115,7 @@ class WSCalendario implements ICalendario
     }
     
     WMap wmFilter  = new WMap(mapFilter);
-    Calendar cData = wmFilter.getCalendar(sDATA, System.currentTimeMillis());
-    Date dDataCal  = new java.sql.Date(WUtil.setTime(cData, 0).getTimeInMillis());
+    Date dDataCal  = wmFilter.getSQLDate(sDATA, System.currentTimeMillis(), 0);
     int iIdFar     = wmFilter.getInt(sID_FAR);
     int iIdCollab  = wmFilter.getInt(sID_COLLABORATORE);
     boolean boRig  = wmFilter.getBoolean(sRIGENERA, false);
@@ -207,8 +205,7 @@ class WSCalendario implements ICalendario
     
     WMap wmFilter  = new WMap(mapFilter);
     int iIdFar     = wmFilter.getInt(sID_FAR);
-    Calendar cData = wmFilter.getCalendar(sDATA, System.currentTimeMillis());
-    Date dDataCal  = new java.sql.Date(WUtil.setTime(cData, 0).getTimeInMillis());
+    Date dDataCal  = wmFilter.getSQLDate(sDATA, System.currentTimeMillis(), 0);
     int iIdCollab  = wmFilter.getInt(sID_COLLABORATORE);
     
     User user  = WSContext.getUser();
