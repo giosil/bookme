@@ -2,6 +2,7 @@
   "public": {
     "name": "Bookme",
     "version": "1.0.0",
+	"theme": "",
     "locale": "it"
   },
   "private": {
