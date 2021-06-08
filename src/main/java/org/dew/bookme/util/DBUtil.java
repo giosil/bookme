@@ -610,8 +610,10 @@ class DBUtil
   boolean setBLOBContent(Connection conn, String sField, String sTable, String sWhere, byte[] abBlobContent)
       throws Exception
   {
+    // Richiamare sempre setEmptyBLOB
+    boolean setEmptyRes = setEmptyBLOB(conn, sField, sTable, sWhere);
     if(abBlobContent == null || abBlobContent.length == 0) {
-      return setEmptyBLOB(conn, sField, sTable, sWhere);
+      return setEmptyRes;
     }
     String sSQL = "SELECT " + sField + " FROM " + sTable;
     if(sWhere != null && sWhere.length() > 0) sSQL += " WHERE " + sWhere;
