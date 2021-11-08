@@ -3151,7 +3151,7 @@ var GUI;
             return _this;
         }
         AppTableActions.prototype.componentDidMount = function () {
-            var $i = $('<div class="table-actions clearfix" data-b2x-sticky-element="1" data-b2x-sticky-element-z-index="3"></div>');
+            var $i = $('<div class="table-actions clearfix"></div>');
             this.root.append($i);
             this.left.mount($i);
             this.right.mount($i);

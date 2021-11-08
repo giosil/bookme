@@ -22,7 +22,7 @@
         }
 
         protected componentDidMount(): void {
-            let $i = $('<div class="table-actions clearfix" data-b2x-sticky-element="1" data-b2x-sticky-element-z-index="3"></div>');
+            let $i = $('<div class="table-actions clearfix"></div>');
             this.root.append($i);
             this.left.mount($i);
             this.right.mount($i);
