@@ -100,7 +100,7 @@ class ConnectionManager
       if(ds != null) return ds.getConnection();
     }
     catch(Exception ex) {}
-    throw new Exception("DataSource " + sName + " not found.");
+    throw new Exception("DataSource " + sName + " not available.");
   }
   
   public static
