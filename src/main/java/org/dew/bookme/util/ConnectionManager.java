@@ -188,8 +188,8 @@ class ConnectionManager
         }
       }
       finally {
-        if(rs != null)  try{ rs.close(); }  catch(Exception ex) {};
-        if(stm != null) try{ stm.close(); } catch(Exception ex) {};
+        if(rs  != null) try{ rs.close();  } catch(Exception ex) {}
+        if(stm != null) try{ stm.close(); } catch(Exception ex) {}
       }
     }
     else {
