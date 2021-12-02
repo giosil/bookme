@@ -12,9 +12,7 @@ class DebugDataSource
   static {
     InputStream oIn = null;
     try {
-      oIn = Thread.currentThread().
-          getContextClassLoader().
-          getResource("jdbc_debug.cfg").openStream();
+      oIn = Thread.currentThread().getContextClassLoader().getResource("jdbc_debug.cfg").openStream();
       config.load(oIn);
     }
     catch(Exception ex) {

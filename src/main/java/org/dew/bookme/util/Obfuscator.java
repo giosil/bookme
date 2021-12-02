@@ -4,7 +4,7 @@ public
 class Obfuscator
 {
   /**
-   * Esegue il criptaggio del testo.
+   * Esegue la cifratura del testo.
    *
    * @param sText String
    * @return String
@@ -48,7 +48,7 @@ class Obfuscator
   }
   
   /**
-   * Esegue il decriptaggio del testo.
+   * Esegue la decifratura del testo.
    *
    * @param sText String
    * @return String

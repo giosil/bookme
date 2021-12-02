@@ -3,11 +3,27 @@ package org.dew.bookme.util;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.*;
-import java.sql.Date;
-import java.util.*;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.util.WUtil;
+
 public
 class DBUtil
 {
@@ -391,7 +407,7 @@ class DBUtil
   }
   
   public static
-  boolean insert(Connection conn, String sTable, Map mapValues)
+  boolean insert(Connection conn, String sTable, Map<String, Object> mapValues)
       throws SQLException
   {
     if(mapValues == null || mapValues.isEmpty()) return false;
@@ -456,14 +472,14 @@ class DBUtil
   }
   
   public static
-  List<String> getFields(Map mapValues)
+  List<String> getFields(Map<String, Object> mapValues)
   {
     List<String> listResult = null;
     if(mapValues == null || mapValues.isEmpty()) return new ArrayList<String>();
-    listResult = (List<String>) mapValues.get(sFIELDS);
+    listResult = WUtil.toListOfString(mapValues.get(sFIELDS));
     if(listResult != null) return listResult;
     listResult = new ArrayList<String>();
-    Iterator itKeys = mapValues.keySet().iterator();
+    Iterator<String> itKeys = mapValues.keySet().iterator();
     while(itKeys.hasNext()) {
       Object oKey = itKeys.next();
       listResult.add(oKey.toString());
@@ -472,7 +488,7 @@ class DBUtil
   }
   
   public static
-  String buildInSet(List oElements)
+  String buildInSet(List<?> oElements)
   {
     if(oElements == null || oElements.size() == 0) return "";
     StringBuilder sb = new StringBuilder();
@@ -480,7 +496,8 @@ class DBUtil
       Object oElement = oElements.get(i);
       if(oElement instanceof String) {
         sb.append(",'" +((String) oElement).replace("'", "''") + "'");
-      } else {
+      } 
+      else {
         sb.append("," + oElement.toString());
       }
     }
@@ -489,16 +506,17 @@ class DBUtil
   }
   
   public static
-  String buildInSet(Set setElements)
+  String buildInSet(Set<?> setElements)
   {
     if(setElements == null || setElements.size() == 0) return "";
     StringBuilder sb = new StringBuilder();
-    Iterator iterator = setElements.iterator();
+    Iterator<?> iterator = setElements.iterator();
     while(iterator.hasNext()) {
       Object oElement = iterator.next();
       if(oElement instanceof String) {
-        sb.append(",'" +((String) oElement).replace("'", "''") + "'");
-      } else {
+        sb.append(",'" + ((String) oElement).replace("'", "''") + "'");
+      } 
+      else {
         sb.append("," + oElement.toString());
       }
     }
@@ -507,17 +525,18 @@ class DBUtil
   }
   
   public static
-  String buildInSet(Set setElements, int iMaxElements)
+  String buildInSet(Set<?> setElements, int iMaxElements)
   {
     if(setElements == null || setElements.size() == 0) return "";
     int iElements = 0;
     StringBuilder sb = new StringBuilder();
-    Iterator iterator = setElements.iterator();
+    Iterator<?> iterator = setElements.iterator();
     while(iterator.hasNext()) {
       Object oElement = iterator.next();
       if(oElement instanceof String) {
-        sb.append(",'" +((String) oElement).replace("'", "''") + "'");
-      } else {
+        sb.append(",'" + ((String) oElement).replace("'", "''") + "'");
+      } 
+      else {
         sb.append("," + oElement.toString());
       }
       iElements++;
@@ -528,25 +547,28 @@ class DBUtil
   }
   
   public static
-  String buildInSet(List oElements, String sSymbolic)
+  String buildInSet(List<?> oElements, String sSymbolic)
   {
     if(oElements == null || oElements.size() == 0) return "";
     StringBuilder sb = new StringBuilder();
     for(int i = 0; i < oElements.size(); i++) {
       Object oElement = oElements.get(i);
       if(oElement instanceof String) {
-        sb.append(",'" +((String) oElement).replace("'", "''") + "'");
-      } else if(oElement instanceof Map) {
-        Object oValue = ((Map) oElement).get(sSymbolic);
+        sb.append(",'" + ((String) oElement).replace("'", "''") + "'");
+      } 
+      else if(oElement instanceof Map) {
+        Object oValue = ((Map<?, ?>) oElement).get(sSymbolic);
         if(oValue == null) {
           continue;
         }
         if(oValue instanceof String) {
           sb.append(",'" + oValue.toString().replace("'", "''") + "'");
-        } else {
+        } 
+        else {
           sb.append("," + oValue);
         }
-      } else {
+      } 
+      else {
         sb.append("," + oElement.toString());
       }
     }
@@ -657,53 +679,43 @@ class DBUtil
   void setParameters(PreparedStatement pstm, Object... parameters)
       throws SQLException
   {
-    if(parameters != null && parameters.length > 0) {
-      for(int i = 0; i < parameters.length; i++) {
-        Object parameter = parameters[i];
-        if(parameter instanceof Integer) {
-          pstm.setInt(i+1, ((Integer) parameter).intValue());
-        }
-        else
-          if(parameter instanceof Long) {
-            pstm.setLong(i+1, ((Long) parameter).longValue());
-          }
-          else
-            if(parameter instanceof Double) {
-              pstm.setDouble(i+1, ((Double) parameter).doubleValue());
-            }
-            else
-              if(parameter instanceof String) {
-                pstm.setString(i+1, (String) parameter);
-              }
-              else
-                if(parameter instanceof Boolean) {
-                  pstm.setInt(i+1, ((Boolean) parameter).booleanValue() ? 1 : 0);
-                }
-                else
-                  if(parameter instanceof java.util.Calendar) {
-                    pstm.setDate(i+1, new java.sql.Date(((java.util.Calendar) parameter).getTimeInMillis()));
-                  }
-                  else
-                    if(parameter instanceof java.sql.Date) {
-                      pstm.setDate(i+1, (java.sql.Date) parameter);
-                    }
-                    else
-                      if(parameter instanceof java.sql.Timestamp) {
-                        pstm.setTimestamp(i+1, (java.sql.Timestamp) parameter);
-                      }
-                      else
-                        if(parameter instanceof java.sql.Time) {
-                          pstm.setTime(i+1, (java.sql.Time) parameter);
-                        }
-                        else
-                          // java.util.Date deve stare dopo java.sql.Date, Timestamp e Time in quanto queste tre classi ereditano da java.util.Date
-                          // pertanto un oggetto di tipo java.sql.Date o Timestamp o Time � anche un oggetto di tipo java.util.Date
-                          if(parameter instanceof java.util.Date) {
-                            pstm.setDate(i+1, new java.sql.Date(((java.util.Date) parameter).getTime()));
-                          }
-                          else {
-                            pstm.setObject(i+1, parameter);
-                          }
+    if(parameters == null || parameters.length == 0) return;
+    for(int i = 0; i < parameters.length; i++) {
+      Object parameter = parameters[i];
+      if(parameter instanceof Integer) {
+        pstm.setInt(i+1, ((Integer) parameter).intValue());
+      }
+      else if(parameter instanceof Long) {
+        pstm.setLong(i+1, ((Long) parameter).longValue());
+      }
+      else if(parameter instanceof Double) {
+        pstm.setDouble(i+1, ((Double) parameter).doubleValue());
+      }
+      else if(parameter instanceof String) {
+        pstm.setString(i+1, (String) parameter);
+      }
+      else if(parameter instanceof Boolean) {
+        pstm.setInt(i+1, ((Boolean) parameter).booleanValue() ? 1 : 0);
+      }
+      else if(parameter instanceof java.util.Calendar) {
+        pstm.setDate(i+1, new java.sql.Date(((java.util.Calendar) parameter).getTimeInMillis()));
+      }
+      else if(parameter instanceof java.sql.Date) {
+        pstm.setDate(i+1, (java.sql.Date) parameter);
+      }
+      else if(parameter instanceof java.sql.Timestamp) {
+        pstm.setTimestamp(i+1, (java.sql.Timestamp) parameter);
+      }
+      else if(parameter instanceof java.sql.Time) {
+        pstm.setTime(i+1, (java.sql.Time) parameter);
+      }
+      else if(parameter instanceof java.util.Date) {
+        // java.util.Date deve stare dopo java.sql.Date, Timestamp e Time in quanto queste tre classi ereditano da java.util.Date
+        // pertanto un oggetto di tipo java.sql.Date o Timestamp o Time � anche un oggetto di tipo java.util.Date
+        pstm.setDate(i+1, new java.sql.Date(((java.util.Date) parameter).getTime()));
+      }
+      else {
+        pstm.setObject(i+1, parameter);
       }
     }
   }

@@ -312,16 +312,16 @@ class DataUtil
     }
     
     List<Integer> holidays = new ArrayList<Integer>();
-    holidays.add(new Integer(99990101)); // Capodanno
-    holidays.add(new Integer(99990106)); // Epifania
-    holidays.add(new Integer(99990425)); // Festa della Liberazione
-    holidays.add(new Integer(99990501)); // Festa dei Lavoratori
-    holidays.add(new Integer(99990602)); // Festa della Repubblica
-    holidays.add(new Integer(99990815)); // Ferragosto
-    holidays.add(new Integer(99991101)); // Tutti i santi
-    holidays.add(new Integer(99991208)); // Immacolata
-    holidays.add(new Integer(99991225)); // Natale
-    holidays.add(new Integer(99991226)); // Santo Stefano
+    holidays.add(99990101); // Capodanno
+    holidays.add(99990106); // Epifania
+    holidays.add(99990425); // Festa della Liberazione
+    holidays.add(99990501); // Festa dei Lavoratori
+    holidays.add(99990602); // Festa della Repubblica
+    holidays.add(99990815); // Ferragosto
+    holidays.add(99991101); // Tutti i santi
+    holidays.add(99991208); // Immacolata
+    holidays.add(99991225); // Natale
+    holidays.add(99991226); // Santo Stefano
     
     int iGenDate = 9999 * 10000 + iMonth * 100 + iDay;
     return holidays.contains(iGenDate);

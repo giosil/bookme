@@ -13,7 +13,6 @@ import java.util.Properties;
 
 import org.util.WUtil;
 
-@SuppressWarnings({"rawtypes"})
 public
 class BEConfig
 {
@@ -100,7 +99,7 @@ class BEConfig
   }
   
   public static
-  List getListProperty(String sKey)
+  List<?> getListProperty(String sKey)
   {
     String sValue = config.getProperty(sKey);
     return WUtil.toList(sValue, true);
