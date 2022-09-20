@@ -208,7 +208,7 @@ class WSPrestazioni
       }
     }
     catch(Exception ex) {
-      logger.error("Eccezione in WSPrestazioni.lookupGruppi", ex);
+      logger.error("Eccezione in WSPrestazioni.lookup", ex);
       throw ex;
     }
     finally {
