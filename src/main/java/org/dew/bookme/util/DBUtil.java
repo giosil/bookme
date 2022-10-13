@@ -295,32 +295,29 @@ class DBUtil
           if(iFieldType == java.sql.Types.CHAR || iFieldType == java.sql.Types.VARCHAR) {
             mapResult.put(sField, rs.getString(i));
           }
-          else
-            if(iFieldType == java.sql.Types.DATE) {
-              mapResult.put(sField, rs.getDate(i));
-            }
-            else
-              if(iFieldType == java.sql.Types.TIME || iFieldType == java.sql.Types.TIMESTAMP) {
-                mapResult.put(sField, rs.getTimestamp(i));
+          else if(iFieldType == java.sql.Types.DATE) {
+            mapResult.put(sField, rs.getDate(i));
+          }
+          else if(iFieldType == java.sql.Types.TIME || iFieldType == java.sql.Types.TIMESTAMP) {
+            mapResult.put(sField, rs.getTimestamp(i));
+          }
+          else if(iFieldType == java.sql.Types.BINARY || iFieldType == java.sql.Types.BLOB || iFieldType == java.sql.Types.CLOB) {
+            mapResult.put(sField, getBLOBContent(rs, i));
+          }
+          else {
+            String sValue = rs.getString(i);
+            if(sValue != null) {
+              if(sValue.indexOf('.') >= 0 || sValue.indexOf(',') >= 0) {
+                mapResult.put(sField, new Double(rs.getDouble(i)));
               }
-              else
-                if(iFieldType == java.sql.Types.BINARY || iFieldType == java.sql.Types.BLOB || iFieldType == java.sql.Types.CLOB) {
-                  mapResult.put(sField, getBLOBContent(rs, i));
-                }
-                else {
-                  String sValue = rs.getString(i);
-                  if(sValue != null) {
-                    if(sValue.indexOf('.') >= 0 || sValue.indexOf(',') >= 0) {
-                      mapResult.put(sField, new Double(rs.getDouble(i)));
-                    }
-                    else {
-                      mapResult.put(sField, new Integer(rs.getInt(i)));
-                    }
-                  }
-                  else {
-                    mapResult.put(sField, null);
-                  }
-                }
+              else {
+                mapResult.put(sField, new Integer(rs.getInt(i)));
+              }
+            }
+            else {
+              mapResult.put(sField, null);
+            }
+          }
           listFields.add(sField);
         }
       }
@@ -354,32 +351,29 @@ class DBUtil
           if(iFieldType == java.sql.Types.CHAR || iFieldType == java.sql.Types.VARCHAR) {
             mapResult.put(sField, rs.getString(i));
           }
-          else
-            if(iFieldType == java.sql.Types.DATE) {
-              mapResult.put(sField, rs.getDate(i));
-            }
-            else
-              if(iFieldType == java.sql.Types.TIME || iFieldType == java.sql.Types.TIMESTAMP) {
-                mapResult.put(sField, rs.getTimestamp(i));
+          else if(iFieldType == java.sql.Types.DATE) {
+            mapResult.put(sField, rs.getDate(i));
+          }
+          else if(iFieldType == java.sql.Types.TIME || iFieldType == java.sql.Types.TIMESTAMP) {
+            mapResult.put(sField, rs.getTimestamp(i));
+          }
+          else if(iFieldType == java.sql.Types.BINARY || iFieldType == java.sql.Types.BLOB || iFieldType == java.sql.Types.CLOB) {
+            mapResult.put(sField, getBLOBContent(rs, i));
+          }
+          else {
+            String sValue = rs.getString(i);
+            if(sValue != null) {
+              if(sValue.indexOf('.') >= 0 || sValue.indexOf(',') >= 0) {
+                mapResult.put(sField, new Double(rs.getDouble(i)));
               }
-              else
-                if(iFieldType == java.sql.Types.BINARY || iFieldType == java.sql.Types.BLOB || iFieldType == java.sql.Types.CLOB) {
-                  mapResult.put(sField, getBLOBContent(rs, i));
-                }
-                else {
-                  String sValue = rs.getString(i);
-                  if(sValue != null) {
-                    if(sValue.indexOf('.') >= 0 || sValue.indexOf(',') >= 0) {
-                      mapResult.put(sField, new Double(rs.getDouble(i)));
-                    }
-                    else {
-                      mapResult.put(sField, new Integer(rs.getInt(i)));
-                    }
-                  }
-                  else {
-                    mapResult.put(sField, null);
-                  }
-                }
+              else {
+                mapResult.put(sField, new Integer(rs.getInt(i)));
+              }
+            }
+            else {
+              mapResult.put(sField, null);
+            }
+          }
           listFields.add(sField);
         }
       }
@@ -435,33 +429,27 @@ class DBUtil
         if(oValue == null) {
           pstm.setObject(i + 1, null);
         }
-        else
-          if(oValue instanceof String) {
-            pstm.setString(i + 1, oValue.toString());
-          }
-          else
-            if(oValue instanceof Integer) {
-              pstm.setInt(i + 1,((Integer) oValue).intValue());
-            }
-            else
-              if(oValue instanceof Double) {
-                pstm.setDouble(i + 1,((Double) oValue).doubleValue());
-              }
-              else
-                if(oValue instanceof java.sql.Date) {
-                  pstm.setDate(i + 1,(java.sql.Date) oValue);
-                }
-                else
-                  if(oValue instanceof java.sql.Timestamp) {
-                    pstm.setTimestamp(i + 1,(java.sql.Timestamp) oValue);
-                  }
-                  else
-                    if(oValue instanceof byte[]) {
-                      pstm.setBytes(i + 1,(byte[]) oValue);
-                    }
-                    else {
-                      pstm.setString(i + 1, oValue.toString());
-                    }
+        else if(oValue instanceof String) {
+          pstm.setString(i + 1, oValue.toString());
+        }
+        else if(oValue instanceof Integer) {
+          pstm.setInt(i + 1,((Integer) oValue).intValue());
+        }
+        else if(oValue instanceof Double) {
+          pstm.setDouble(i + 1,((Double) oValue).doubleValue());
+        }
+        else if(oValue instanceof java.sql.Date) {
+          pstm.setDate(i + 1,(java.sql.Date) oValue);
+        }
+        else if(oValue instanceof java.sql.Timestamp) {
+          pstm.setTimestamp(i + 1,(java.sql.Timestamp) oValue);
+        }
+        else if(oValue instanceof byte[]) {
+          pstm.setBytes(i + 1,(byte[]) oValue);
+        }
+        else {
+          pstm.setString(i + 1, oValue.toString());
+        }
       }
       pstm.executeUpdate();
     }
