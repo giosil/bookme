@@ -1,0 +1,15 @@
+<Context path="" crossContext="true">
+
+	<Resource
+		name="jdbc/db_bookme"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="org.hsqldb.jdbc.JDBCDriver"
+		url="jdbc:hsqldb:file:/root/bookme"
+		username="SA"
+		password=""
+		maxActive="20"
+		maxWait="100000"
+	/>
+
+</Context>

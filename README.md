@@ -27,6 +27,10 @@ Web module to manage appointments. Use *wrapp* frontend template.
 - Launch `http://localhost:8080/wrapp` 
 - Enter (whatever) credentials on the login page (no check done in dev configuration)
 
+## Deploy web application on Tomcat using Docker
+
+See [Tomcat](https://github.com/giosil/bookme/tomcat)
+
 ## Contributors
 
 * [Giorgio Silvestris](https://github.com/giosil)
