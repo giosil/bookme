@@ -83,9 +83,11 @@ Start container
 docker start tomcat-bookme
 ```
 
+launch `http://localhost:8080/wrapp`
+
 ## To pull image to Docker Hub
 
-Create repository `tomcat-bookme` in `https://hub.docker.com`.
+Create *repository* `tomcat-bookme` in your *namespace* (`giosil` in my case) of `https://hub.docker.com`.
 
 ```
 docker commit tomcat-bookme giosil/tomcat-bookme:1.0.0
