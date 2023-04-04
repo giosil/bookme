@@ -2,7 +2,18 @@
 
 ## Build container using Dockerfile
 
+Because you cannot include files outside Docker's build context you have to collect all files in this directory.
+
+`.\collect_files.cmd` - in Windows
+`.\collect_files.sh`  - in Linux
+
+and then
+
 `docker build -t tomcat-bookme .`
+
+`docker run --name tomcat-bookme -p 8080:8080 -d tomcat-bookme`
+
+launch `http://localhost:8080/wrapp`
 
 ## Build container manually
 
