@@ -4,8 +4,8 @@
 
 Because you cannot include files outside Docker's build context you have to collect all files in this directory.
 
-`.\collect_files.cmd` - in Windows
-`.\collect_files.sh`  - in Linux
+- `.\collect_files.cmd` in Windows
+- `.\collect_files.sh`  in Linux
 
 and then
 
