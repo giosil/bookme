@@ -29,7 +29,7 @@ Web module to manage appointments. Use *wrapp* frontend template.
 
 ## Deploy web application on Tomcat using Docker
 
-See [Tomcat](https://github.com/giosil/bookme/tomcat)
+See [Tomcat](https://github.com/giosil/bookme/tree/master/tomcat) page.
 
 ## Contributors
 
